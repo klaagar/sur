@@ -515,7 +515,7 @@ body:not(.owner) .node-photo .plus{display:none}
 
   <div class="ask-section" id="askSection">
     <h2 id="askTitle">เป็นแฟนกันมั้ย?</h2>
-    <p id="askSub">คิดมานานมากแล้ว</p>
+    <p id="askSub"></p>
     <div class="ask-buttons" id="askButtons"><button id="btn-yes">ตกลง 💍</button><button id="btn-no">ไม่ 🥺</button></div>
     <div class="heart-burst" id="heartBurst"></div>
   </div>
@@ -911,7 +911,7 @@ let timelineBuilt = false;
 const defaultNodes = [
   {date:'วันที่เราเจอกันครั้งแรก', text:'จุดเริ่มต้นของทุกอย่าง...', img:''},
   {date:'วันที่เริ่มคุยกันถูกคอ', text:'แชทกันจนดึกทุกคืนเลย', img:''},
-  {date:'วันนี้', text:'เราก็คุยกันมานานแล้ว', img:''}
+  {date:'วันนี้', text:'เราก็คุยกันมาสักพักแล้ว', img:''}
 ];
 function relayout(){
   timelineEl.querySelectorAll('.node').forEach((n,i)=>{ n.classList.toggle('left', i%2 === 0); n.classList.toggle('right', i%2 === 1); });
@@ -920,9 +920,7 @@ function addNode(data, instant){
   const node = document.createElement('div'); node.className = 'node';
   node.innerHTML = '<div class="node-dot"></div><div class="node-card"><button class="node-remove owner-only" title="ลบ">✕ ลบ</button><div class="node-photo"><span class="plus">＋ ใส่รูป</span><input type="file" accept="image/*"></div><input class="node-date" placeholder="วัน/เหตุการณ์..."><textarea class="node-text" rows="3" placeholder="เล่าความทรงจำตรงนี้..."></textarea></div>';
   node.querySelector('.node-date').value = (data && data.date) ? String(data.date) : '';
-  const OLD_TEXT = {'ใกล้จะเป็นแฟนกันแล้วรึเปล่านะ 😳':'เราก็คุยกันมานานแล้ว'};
-  const rawText = (data && data.text) ? String(data.text) : '';
-  node.querySelector('.node-text').value = OLD_TEXT[rawText.trim()] || rawText;
+  node.querySelector('.node-text').value = (data && data.text) ? String(data.text) : '';
   const box = node.querySelector('.node-photo'), init = data ? safeImg(data.img) : '';
   if(init){ const im = document.createElement('img'); im.src = init; box.querySelector('.plus').remove(); box.prepend(im); } else box.classList.add('empty');
   node.querySelector('input[type=file]').addEventListener('change', async e=>{
@@ -1034,7 +1032,7 @@ function refreshAskSection(){
     $('viewCounterBtn').addEventListener('click', goToCounter);
   } else {
     $('askTitle').textContent = 'เป็นแฟนกันมั้ย?';
-    $('askSub').textContent = 'คิดมานานมากแล้ว';
+    $('askSub').textContent = 'คิดมานานมากแล้ว กล้าถามตอนนี้เลยละกัน 🥹';
     buttons.innerHTML = '<button id="btn-yes">ตกลง 💍</button><button id="btn-no">ไม่ 🥺</button>';
     const no = $('btn-no');
     no.addEventListener('mouseenter', dodge);
